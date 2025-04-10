@@ -1,0 +1,6132 @@
+domain_file,problem_file,domain_content,problem_content
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_0/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_0)
+    (:domain block-world)
+
+    (:objects
+        black purple yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear yellow)
+        (on yellow purple)
+        (ontable black)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear purple)
+            (on black yellow)
+            (on purple black)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_1/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_1)
+    (:domain block-world)
+
+    (:objects
+        green purple yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear purple)
+        (clear yellow)
+        (ontable green)
+        (ontable purple)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear purple)
+            (clear yellow)
+            (on yellow green)
+            (ontable green)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_2/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_2)
+    (:domain block-world)
+
+    (:objects
+        orange purple white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (on orange purple)
+        (on purple white)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear orange)
+            (clear purple)
+            (clear white)
+            (ontable orange)
+            (ontable purple)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_3/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_3)
+    (:domain block-world)
+
+    (:objects
+        blue green orange - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear green)
+        (on green orange)
+        (ontable blue)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear orange)
+            (on orange blue)
+            (ontable blue)
+            (ontable green)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_4/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_4)
+    (:domain block-world)
+
+    (:objects
+        red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear red)
+        (clear yellow)
+        (on red white)
+        (ontable white)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (clear white)
+            (on white yellow)
+            (ontable red)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_5/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_5)
+    (:domain block-world)
+
+    (:objects
+        black purple white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear white)
+        (on black purple)
+        (ontable purple)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear purple)
+            (clear white)
+            (ontable black)
+            (ontable purple)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_6/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_6)
+    (:domain block-world)
+
+    (:objects
+        black green orange - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear green)
+        (on green orange)
+        (ontable black)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (on black orange)
+            (ontable green)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_7/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_7)
+    (:domain block-world)
+
+    (:objects
+        black purple white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear purple)
+        (on black white)
+        (ontable purple)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear purple)
+            (on purple white)
+            (on white black)
+            (ontable black)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_8/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_8)
+    (:domain block-world)
+
+    (:objects
+        black green white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear white)
+        (on white black)
+        (ontable black)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (clear white)
+            (ontable black)
+            (ontable green)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_9/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_9)
+    (:domain block-world)
+
+    (:objects
+        red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear red)
+        (clear white)
+        (on red yellow)
+        (ontable white)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (on red white)
+            (on white yellow)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_10/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_10)
+    (:domain block-world)
+
+    (:objects
+        blue white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear yellow)
+        (on white blue)
+        (on yellow white)
+        (ontable blue)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear white)
+            (clear yellow)
+            (ontable blue)
+            (ontable white)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_11/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_11)
+    (:domain block-world)
+
+    (:objects
+        black green white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (on black white)
+        (on green black)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (on black white)
+            (ontable green)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_12/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_12)
+    (:domain block-world)
+
+    (:objects
+        black green yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear green)
+        (on green yellow)
+        (ontable black)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (on green yellow)
+            (ontable black)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_13/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_13)
+    (:domain block-world)
+
+    (:objects
+        green purple red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear purple)
+        (clear red)
+        (on purple green)
+        (ontable green)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (on purple green)
+            (on red purple)
+            (ontable green)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_14/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_14)
+    (:domain block-world)
+
+    (:objects
+        black purple white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear purple)
+        (clear white)
+        (ontable black)
+        (ontable purple)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear white)
+            (on black purple)
+            (on white black)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_15/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_15)
+    (:domain block-world)
+
+    (:objects
+        black purple white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (on black white)
+        (on white purple)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear purple)
+            (clear white)
+            (ontable black)
+            (ontable purple)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_16/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_16)
+    (:domain block-world)
+
+    (:objects
+        black orange red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear orange)
+        (clear red)
+        (ontable black)
+        (ontable orange)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear red)
+            (on black orange)
+            (ontable orange)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_17/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_17)
+    (:domain block-world)
+
+    (:objects
+        blue green yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear yellow)
+        (on yellow blue)
+        (ontable blue)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear yellow)
+            (on blue green)
+            (ontable green)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_18/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_18)
+    (:domain block-world)
+
+    (:objects
+        green red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear red)
+        (on red white)
+        (ontable green)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear white)
+            (on green red)
+            (ontable red)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_19/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_19)
+    (:domain block-world)
+
+    (:objects
+        black blue orange - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear orange)
+        (on black blue)
+        (ontable blue)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear blue)
+            (clear orange)
+            (ontable black)
+            (ontable blue)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_20/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_20)
+    (:domain block-world)
+
+    (:objects
+        black green white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear white)
+        (on black green)
+        (ontable green)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (on green white)
+            (ontable black)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_21/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_21)
+    (:domain block-world)
+
+    (:objects
+        black green red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear red)
+        (on red black)
+        (ontable black)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear red)
+            (on red green)
+            (ontable black)
+            (ontable green)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_22/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_22)
+    (:domain block-world)
+
+    (:objects
+        black blue white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear white)
+        (on black blue)
+        (ontable blue)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear blue)
+            (on blue white)
+            (ontable black)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_23/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_23)
+    (:domain block-world)
+
+    (:objects
+        black orange yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear orange)
+        (on orange yellow)
+        (ontable black)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear orange)
+            (clear yellow)
+            (ontable black)
+            (ontable orange)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/3/problem_train_3_scenario_24/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_3_scenario_24)
+    (:domain block-world)
+
+    (:objects
+        black orange yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (on black orange)
+        (on orange yellow)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear orange)
+            (clear yellow)
+            (on orange black)
+            (ontable black)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_0/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_0)
+    (:domain block-world)
+
+    (:objects
+        black green red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear red)
+        (on black yellow)
+        (on red black)
+        (ontable green)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (on green red)
+            (on red yellow)
+            (ontable black)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_1/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_1)
+    (:domain block-world)
+
+    (:objects
+        black blue red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear red)
+        (on black yellow)
+        (on blue black)
+        (ontable red)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (on black yellow)
+            (on red black)
+            (on yellow blue)
+            (ontable blue)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_2/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_2)
+    (:domain block-world)
+
+    (:objects
+        orange red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (clear white)
+        (on orange red)
+        (on white yellow)
+        (ontable red)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (clear white)
+            (clear yellow)
+            (on yellow orange)
+            (ontable orange)
+            (ontable red)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_3/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_3)
+    (:domain block-world)
+
+    (:objects
+        black blue orange white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear white)
+        (on orange black)
+        (on white orange)
+        (ontable black)
+        (ontable blue)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (on black blue)
+            (on blue white)
+            (on white orange)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_4/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_4)
+    (:domain block-world)
+
+    (:objects
+        green orange red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear red)
+        (clear white)
+        (on red orange)
+        (on white green)
+        (ontable green)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear red)
+            (clear white)
+            (on red orange)
+            (ontable green)
+            (ontable orange)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_5/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_5)
+    (:domain block-world)
+
+    (:objects
+        blue purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (on blue red)
+        (on red white)
+        (on white purple)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear purple)
+            (on blue red)
+            (on purple white)
+            (ontable red)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_6/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_6)
+    (:domain block-world)
+
+    (:objects
+        orange red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (clear yellow)
+        (on orange white)
+        (on white red)
+        (ontable red)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear orange)
+            (clear red)
+            (clear white)
+            (clear yellow)
+            (ontable orange)
+            (ontable red)
+            (ontable white)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_7/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_7)
+    (:domain block-world)
+
+    (:objects
+        black green white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear white)
+        (on black yellow)
+        (on yellow green)
+        (ontable green)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear yellow)
+            (on black white)
+            (on green black)
+            (on yellow green)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_8/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_8)
+    (:domain block-world)
+
+    (:objects
+        black green orange white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear white)
+        (on orange green)
+        (on white orange)
+        (ontable black)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (on black white)
+            (on white orange)
+            (ontable green)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_9/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_9)
+    (:domain block-world)
+
+    (:objects
+        black blue green white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear blue)
+        (on black white)
+        (on blue green)
+        (ontable green)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear green)
+            (on blue black)
+            (on green white)
+            (ontable black)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_10/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_10)
+    (:domain block-world)
+
+    (:objects
+        black green white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear green)
+        (clear white)
+        (clear yellow)
+        (ontable black)
+        (ontable green)
+        (ontable white)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear white)
+            (clear yellow)
+            (on white black)
+            (on yellow green)
+            (ontable black)
+            (ontable green)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_11/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_11)
+    (:domain block-world)
+
+    (:objects
+        blue orange red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear orange)
+        (clear red)
+        (clear yellow)
+        (ontable blue)
+        (ontable orange)
+        (ontable red)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear orange)
+            (clear red)
+            (on orange blue)
+            (on red yellow)
+            (ontable blue)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_12/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_12)
+    (:domain block-world)
+
+    (:objects
+        orange purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (clear purple)
+        (on purple white)
+        (on white red)
+        (ontable orange)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear orange)
+            (clear purple)
+            (clear white)
+            (on white red)
+            (ontable orange)
+            (ontable purple)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_13/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_13)
+    (:domain block-world)
+
+    (:objects
+        black green orange yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (on black green)
+        (on green yellow)
+        (on yellow orange)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (on black orange)
+            (on green black)
+            (on orange yellow)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_14/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_14)
+    (:domain block-world)
+
+    (:objects
+        blue orange red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear red)
+        (clear yellow)
+        (on blue orange)
+        (on yellow blue)
+        (ontable orange)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear orange)
+            (clear red)
+            (on blue yellow)
+            (on red blue)
+            (ontable orange)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_15/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_15)
+    (:domain block-world)
+
+    (:objects
+        black blue orange white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear orange)
+        (on black white)
+        (on orange black)
+        (ontable blue)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear white)
+            (on blue orange)
+            (on orange black)
+            (ontable black)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_16/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_16)
+    (:domain block-world)
+
+    (:objects
+        black blue orange red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear red)
+        (on black orange)
+        (on red black)
+        (ontable blue)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear blue)
+            (clear red)
+            (on blue orange)
+            (ontable black)
+            (ontable orange)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_17/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_17)
+    (:domain block-world)
+
+    (:objects
+        blue green red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear white)
+        (on green red)
+        (on red blue)
+        (on white green)
+        (ontable blue)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (clear white)
+            (on blue green)
+            (on white blue)
+            (ontable green)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_18/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_18)
+    (:domain block-world)
+
+    (:objects
+        green purple red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear purple)
+        (clear red)
+        (on green yellow)
+        (ontable purple)
+        (ontable red)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear purple)
+            (on green red)
+            (on purple yellow)
+            (on yellow green)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_19/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_19)
+    (:domain block-world)
+
+    (:objects
+        orange purple white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (clear purple)
+        (clear white)
+        (on orange yellow)
+        (ontable purple)
+        (ontable white)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear white)
+            (clear yellow)
+            (on purple orange)
+            (on yellow purple)
+            (ontable orange)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_20/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_20)
+    (:domain block-world)
+
+    (:objects
+        blue green white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear white)
+        (on blue green)
+        (on white yellow)
+        (on yellow blue)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear green)
+            (clear white)
+            (clear yellow)
+            (ontable blue)
+            (ontable green)
+            (ontable white)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_21/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_21)
+    (:domain block-world)
+
+    (:objects
+        black blue orange yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear orange)
+        (on blue black)
+        (on orange yellow)
+        (ontable black)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear orange)
+            (clear yellow)
+            (on yellow black)
+            (ontable black)
+            (ontable blue)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_22/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_22)
+    (:domain block-world)
+
+    (:objects
+        blue green orange red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear green)
+        (clear orange)
+        (on orange red)
+        (ontable blue)
+        (ontable green)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear green)
+            (clear orange)
+            (on blue red)
+            (ontable green)
+            (ontable orange)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_23/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_23)
+    (:domain block-world)
+
+    (:objects
+        green orange purple white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (clear purple)
+        (on purple white)
+        (on white green)
+        (ontable green)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear purple)
+            (on green white)
+            (on white orange)
+            (ontable orange)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/4/problem_train_4_scenario_24/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_4_scenario_24)
+    (:domain block-world)
+
+    (:objects
+        black purple white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear white)
+        (on purple black)
+        (on white yellow)
+        (on yellow purple)
+        (ontable black)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear white)
+            (on white yellow)
+            (on yellow purple)
+            (ontable black)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_0/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_0)
+    (:domain block-world)
+
+    (:objects
+        black blue orange red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (clear white)
+        (on black red)
+        (on orange blue)
+        (on white black)
+        (ontable blue)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear blue)
+            (clear orange)
+            (clear white)
+            (on black red)
+            (ontable blue)
+            (ontable orange)
+            (ontable red)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_1/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_1)
+    (:domain block-world)
+
+    (:objects
+        black green orange red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear yellow)
+        (on black green)
+        (on green red)
+        (on red orange)
+        (on yellow black)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear orange)
+            (clear red)
+            (on black yellow)
+            (on orange black)
+            (on red green)
+            (ontable green)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_2/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_2)
+    (:domain block-world)
+
+    (:objects
+        black orange purple white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear purple)
+        (on purple yellow)
+        (on white orange)
+        (on yellow white)
+        (ontable black)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear orange)
+            (clear purple)
+            (on black yellow)
+            (on purple white)
+            (ontable orange)
+            (ontable white)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_3/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_3)
+    (:domain block-world)
+
+    (:objects
+        black blue orange purple yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear yellow)
+        (on orange purple)
+        (on purple black)
+        (on yellow orange)
+        (ontable black)
+        (ontable blue)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear orange)
+            (clear yellow)
+            (on black blue)
+            (on blue purple)
+            (ontable orange)
+            (ontable purple)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_4/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_4)
+    (:domain block-world)
+
+    (:objects
+        black orange purple red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear purple)
+        (clear red)
+        (on black orange)
+        (on purple yellow)
+        (ontable orange)
+        (ontable red)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (on black orange)
+            (on orange yellow)
+            (on purple red)
+            (on yellow purple)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_5/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_5)
+    (:domain block-world)
+
+    (:objects
+        blue green orange red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear green)
+        (clear white)
+        (on green orange)
+        (on orange red)
+        (ontable blue)
+        (ontable red)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear green)
+            (clear orange)
+            (clear white)
+            (on orange red)
+            (ontable blue)
+            (ontable green)
+            (ontable red)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_6/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_6)
+    (:domain block-world)
+
+    (:objects
+        black purple red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear purple)
+        (clear yellow)
+        (on black red)
+        (on purple white)
+        (ontable red)
+        (ontable white)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear red)
+            (clear white)
+            (on black purple)
+            (on white yellow)
+            (ontable purple)
+            (ontable red)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_7/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_7)
+    (:domain block-world)
+
+    (:objects
+        black blue green red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (on black red)
+        (on blue white)
+        (on red blue)
+        (on white green)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear white)
+            (on black red)
+            (on blue black)
+            (on white green)
+            (ontable green)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_8/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_8)
+    (:domain block-world)
+
+    (:objects
+        black green purple white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear purple)
+        (on black yellow)
+        (on green white)
+        (on purple black)
+        (on yellow green)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear purple)
+            (clear white)
+            (on green yellow)
+            (on purple green)
+            (on white black)
+            (ontable black)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_9/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_9)
+    (:domain block-world)
+
+    (:objects
+        blue green purple white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear white)
+        (on blue purple)
+        (on purple green)
+        (on white yellow)
+        (on yellow blue)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear white)
+            (clear yellow)
+            (on green purple)
+            (on purple blue)
+            (on yellow green)
+            (ontable blue)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_10/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_10)
+    (:domain block-world)
+
+    (:objects
+        black green orange purple red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear orange)
+        (on black red)
+        (on green purple)
+        (on red green)
+        (ontable orange)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear purple)
+            (on black red)
+            (on orange green)
+            (on red orange)
+            (ontable green)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_11/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_11)
+    (:domain block-world)
+
+    (:objects
+        blue green orange purple red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear orange)
+        (on orange red)
+        (on purple green)
+        (on red purple)
+        (ontable blue)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (on blue red)
+            (on green orange)
+            (on orange blue)
+            (on red purple)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_12/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_12)
+    (:domain block-world)
+
+    (:objects
+        black blue orange red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear orange)
+        (clear red)
+        (on black white)
+        (on orange blue)
+        (ontable blue)
+        (ontable red)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear blue)
+            (on black white)
+            (on blue orange)
+            (on white red)
+            (ontable orange)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_13/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_13)
+    (:domain block-world)
+
+    (:objects
+        black blue purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (on black purple)
+        (on blue black)
+        (on purple white)
+        (on white red)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (clear white)
+            (on black blue)
+            (on purple black)
+            (on white purple)
+            (ontable blue)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_14/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_14)
+    (:domain block-world)
+
+    (:objects
+        green orange purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear orange)
+        (on green purple)
+        (on orange red)
+        (on purple white)
+        (ontable red)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (on green purple)
+            (on purple red)
+            (on red white)
+            (on white orange)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_15/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_15)
+    (:domain block-world)
+
+    (:objects
+        black green purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (on black purple)
+        (on green white)
+        (on purple red)
+        (on red green)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear purple)
+            (on purple white)
+            (on red green)
+            (on white red)
+            (ontable black)
+            (ontable green)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_16/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_16)
+    (:domain block-world)
+
+    (:objects
+        black purple red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear red)
+        (on black purple)
+        (on purple yellow)
+        (on red white)
+        (on white black)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (clear white)
+            (on black yellow)
+            (on red black)
+            (on white purple)
+            (ontable purple)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_17/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_17)
+    (:domain block-world)
+
+    (:objects
+        black orange purple red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear purple)
+        (clear red)
+        (clear yellow)
+        (on black orange)
+        (on red black)
+        (ontable orange)
+        (ontable purple)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear orange)
+            (on orange purple)
+            (on purple red)
+            (on red yellow)
+            (ontable black)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_18/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_18)
+    (:domain block-world)
+
+    (:objects
+        black green purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear green)
+        (clear purple)
+        (on green red)
+        (on purple white)
+        (ontable black)
+        (ontable red)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (clear red)
+            (on purple white)
+            (on red purple)
+            (ontable black)
+            (ontable green)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_19/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_19)
+    (:domain block-world)
+
+    (:objects
+        blue green orange red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear green)
+        (on blue yellow)
+        (on red orange)
+        (on yellow red)
+        (ontable green)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (on blue yellow)
+            (on orange red)
+            (on red green)
+            (on yellow orange)
+            (ontable green)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_20/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_20)
+    (:domain block-world)
+
+    (:objects
+        blue green orange red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear red)
+        (clear white)
+        (on green orange)
+        (on white green)
+        (ontable blue)
+        (ontable orange)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear green)
+            (on green white)
+            (on red orange)
+            (on white red)
+            (ontable blue)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_21/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_21)
+    (:domain block-world)
+
+    (:objects
+        black green purple red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear yellow)
+        (on green red)
+        (on purple green)
+        (on yellow purple)
+        (ontable black)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (clear purple)
+            (clear red)
+            (on green yellow)
+            (ontable black)
+            (ontable purple)
+            (ontable red)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_22/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_22)
+    (:domain block-world)
+
+    (:objects
+        black orange purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (on black purple)
+        (on orange red)
+        (on red white)
+        (on white black)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear orange)
+            (clear red)
+            (clear white)
+            (on red purple)
+            (ontable black)
+            (ontable orange)
+            (ontable purple)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_23/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_23)
+    (:domain block-world)
+
+    (:objects
+        black blue green purple red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear blue)
+        (clear purple)
+        (on blue green)
+        (on purple red)
+        (ontable black)
+        (ontable green)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear blue)
+            (clear red)
+            (on blue green)
+            (on red purple)
+            (ontable black)
+            (ontable green)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/5/problem_train_5_scenario_24/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_5_scenario_24)
+    (:domain block-world)
+
+    (:objects
+        blue green orange purple red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear green)
+        (clear orange)
+        (clear red)
+        (on green purple)
+        (ontable blue)
+        (ontable orange)
+        (ontable purple)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear orange)
+            (on green red)
+            (on orange blue)
+            (on red purple)
+            (ontable blue)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_0/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_0)
+    (:domain block-world)
+
+    (:objects
+        blue green orange red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear white)
+        (clear yellow)
+        (on blue red)
+        (on orange blue)
+        (on red green)
+        (on yellow orange)
+        (ontable green)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (on blue orange)
+            (on green white)
+            (on red yellow)
+            (on white blue)
+            (on yellow green)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_1/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_1)
+    (:domain block-world)
+
+    (:objects
+        black blue purple red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear red)
+        (clear white)
+        (on black yellow)
+        (on purple black)
+        (on red purple)
+        (on yellow blue)
+        (ontable blue)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear purple)
+            (clear red)
+            (clear yellow)
+            (on black blue)
+            (on white black)
+            (on yellow white)
+            (ontable blue)
+            (ontable purple)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_2/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_2)
+    (:domain block-world)
+
+    (:objects
+        black green orange purple red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (clear yellow)
+        (on black purple)
+        (on green black)
+        (on orange red)
+        (on red green)
+        (ontable purple)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (clear yellow)
+            (on black purple)
+            (on green orange)
+            (on red black)
+            (on yellow green)
+            (ontable orange)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_3/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_3)
+    (:domain block-world)
+
+    (:objects
+        black green orange purple white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear orange)
+        (clear white)
+        (on black purple)
+        (on orange green)
+        (on white yellow)
+        (on yellow black)
+        (ontable green)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear orange)
+            (clear purple)
+            (on purple white)
+            (on white yellow)
+            (on yellow green)
+            (ontable black)
+            (ontable green)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_4/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_4)
+    (:domain block-world)
+
+    (:objects
+        black blue orange purple red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear orange)
+        (on orange yellow)
+        (on purple red)
+        (on red blue)
+        (on yellow purple)
+        (ontable black)
+        (ontable blue)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear purple)
+            (clear red)
+            (on orange yellow)
+            (on purple black)
+            (on red orange)
+            (ontable black)
+            (ontable blue)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_5/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_5)
+    (:domain block-world)
+
+    (:objects
+        black blue green red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear green)
+        (on green red)
+        (on red yellow)
+        (on white blue)
+        (on yellow white)
+        (ontable black)
+        (ontable blue)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (clear white)
+            (clear yellow)
+            (on green black)
+            (on red blue)
+            (on yellow green)
+            (ontable black)
+            (ontable blue)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_6/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_6)
+    (:domain block-world)
+
+    (:objects
+        black blue green orange purple red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear green)
+        (clear red)
+        (on black orange)
+        (on blue purple)
+        (on red blue)
+        (ontable green)
+        (ontable orange)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear red)
+            (on black orange)
+            (on orange blue)
+            (on purple black)
+            (on red purple)
+            (ontable blue)
+            (ontable green)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_7/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_7)
+    (:domain block-world)
+
+    (:objects
+        black orange purple red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear red)
+        (clear white)
+        (clear yellow)
+        (on black purple)
+        (on yellow orange)
+        (ontable orange)
+        (ontable purple)
+        (ontable red)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear orange)
+            (clear yellow)
+            (on black purple)
+            (on purple white)
+            (on white red)
+            (on yellow black)
+            (ontable orange)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_8/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_8)
+    (:domain block-world)
+
+    (:objects
+        blue green orange purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear orange)
+        (clear white)
+        (on green purple)
+        (on orange red)
+        (on white green)
+        (ontable blue)
+        (ontable purple)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear orange)
+            (clear purple)
+            (clear red)
+            (on green white)
+            (on orange green)
+            (ontable blue)
+            (ontable purple)
+            (ontable red)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_9/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_9)
+    (:domain block-world)
+
+    (:objects
+        black green orange red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear orange)
+        (clear yellow)
+        (on black red)
+        (on orange white)
+        (on white green)
+        (ontable green)
+        (ontable red)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear red)
+            (clear yellow)
+            (on black green)
+            (on green white)
+            (on orange black)
+            (on yellow orange)
+            (ontable red)
+            (ontable white)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_10/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_10)
+    (:domain block-world)
+
+    (:objects
+        black blue green orange purple white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear purple)
+        (on black green)
+        (on green orange)
+        (on purple white)
+        (on white black)
+        (ontable blue)
+        (ontable orange)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear purple)
+            (on black green)
+            (on green white)
+            (on orange blue)
+            (on white orange)
+            (ontable blue)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_11/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_11)
+    (:domain block-world)
+
+    (:objects
+        black blue green purple red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear green)
+        (clear red)
+        (on black yellow)
+        (on green black)
+        (on red purple)
+        (ontable blue)
+        (ontable purple)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear blue)
+            (clear green)
+            (clear yellow)
+            (on blue red)
+            (on red purple)
+            (ontable black)
+            (ontable green)
+            (ontable purple)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_12/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_12)
+    (:domain block-world)
+
+    (:objects
+        blue green orange red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (on blue green)
+        (on green red)
+        (on orange yellow)
+        (on red white)
+        (on white orange)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear white)
+            (clear yellow)
+            (on blue orange)
+            (on orange red)
+            (on white blue)
+            (on yellow green)
+            (ontable green)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_13/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_13)
+    (:domain block-world)
+
+    (:objects
+        black blue green orange purple white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear blue)
+        (clear orange)
+        (clear purple)
+        (on blue white)
+        (on orange green)
+        (ontable black)
+        (ontable green)
+        (ontable purple)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear orange)
+            (clear white)
+            (on blue purple)
+            (on purple black)
+            (on white blue)
+            (ontable black)
+            (ontable green)
+            (ontable orange)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_14/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_14)
+    (:domain block-world)
+
+    (:objects
+        blue green purple red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear yellow)
+        (on green red)
+        (on purple green)
+        (on red white)
+        (on yellow purple)
+        (ontable blue)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear green)
+            (clear purple)
+            (clear red)
+            (clear yellow)
+            (on purple white)
+            (ontable blue)
+            (ontable green)
+            (ontable red)
+            (ontable white)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_15/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_15)
+    (:domain block-world)
+
+    (:objects
+        black blue purple red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear purple)
+        (on black yellow)
+        (on blue black)
+        (on purple blue)
+        (on white red)
+        (on yellow white)
+        (ontable red)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (on black red)
+            (on blue purple)
+            (on red yellow)
+            (on white blue)
+            (on yellow white)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_16/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_16)
+    (:domain block-world)
+
+    (:objects
+        black blue green orange purple red - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear red)
+        (on black purple)
+        (on blue orange)
+        (on orange green)
+        (on purple blue)
+        (on red black)
+        (ontable green)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear orange)
+            (on black purple)
+            (on blue red)
+            (on green blue)
+            (on orange black)
+            (ontable purple)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_17/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_17)
+    (:domain block-world)
+
+    (:objects
+        black green orange purple white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear purple)
+        (on black yellow)
+        (on green black)
+        (on orange white)
+        (on purple green)
+        (on yellow orange)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (on black purple)
+            (on green orange)
+            (on orange white)
+            (on purple green)
+            (on white yellow)
+            (ontable yellow)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_18/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_18)
+    (:domain block-world)
+
+    (:objects
+        black blue green purple red white - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear red)
+        (on black blue)
+        (on blue purple)
+        (on red white)
+        (on white black)
+        (ontable green)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear green)
+            (on green red)
+            (on purple white)
+            (on red purple)
+            (on white blue)
+            (ontable black)
+            (ontable blue)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_19/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_19)
+    (:domain block-world)
+
+    (:objects
+        black blue orange purple red yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear black)
+        (clear blue)
+        (clear yellow)
+        (on black purple)
+        (on blue red)
+        (on red orange)
+        (ontable orange)
+        (ontable purple)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear orange)
+            (clear red)
+            (on black purple)
+            (on orange yellow)
+            (on yellow blue)
+            (ontable blue)
+            (ontable purple)
+            (ontable red)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_20/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_20)
+    (:domain block-world)
+
+    (:objects
+        black blue green orange purple yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (on black orange)
+        (on blue black)
+        (on green yellow)
+        (on orange purple)
+        (on yellow blue)
+        (ontable purple)
+    )
+
+    (:goal
+        (and
+            (clear green)
+            (clear yellow)
+            (on black orange)
+            (on blue purple)
+            (on orange blue)
+            (on yellow black)
+            (ontable green)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_21/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_21)
+    (:domain block-world)
+
+    (:objects
+        black blue green purple white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (on black blue)
+        (on blue white)
+        (on green black)
+        (on purple yellow)
+        (on white purple)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (clear yellow)
+            (on blue purple)
+            (on green white)
+            (on white blue)
+            (on yellow green)
+            (ontable black)
+            (ontable purple)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_22/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_22)
+    (:domain block-world)
+
+    (:objects
+        black blue orange red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear red)
+        (clear white)
+        (clear yellow)
+        (on black orange)
+        (on red blue)
+        (on yellow black)
+        (ontable blue)
+        (ontable orange)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (on black white)
+            (on orange blue)
+            (on red orange)
+            (on white yellow)
+            (on yellow red)
+            (ontable blue)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_23/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_23)
+    (:domain block-world)
+
+    (:objects
+        black blue orange red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear blue)
+        (clear yellow)
+        (on black white)
+        (on orange black)
+        (on red orange)
+        (on yellow red)
+        (ontable blue)
+        (ontable white)
+    )
+
+    (:goal
+        (and
+            (clear black)
+            (on black red)
+            (on orange white)
+            (on red orange)
+            (on white yellow)
+            (on yellow blue)
+            (ontable blue)
+        )
+    )
+)
+"
+problems/domain.pddl,problems/train/6/problem_train_6_scenario_24/problem.pddl,"(define (domain block-world)
+  (:requirements :strips :typing)
+  (:types block)
+
+  (:predicates 
+    (on ?x - block ?y - block)          ; block x is on block y
+    (ontable ?x - block)                ; block x is on the table
+    (clear ?x - block)                  ; block x has nothing on it
+    (holding ?x - block)                ; the robot arm is holding block x
+    (arm-empty)                         ; the robot arm is empty
+  )
+
+  (:action pick-up
+    :parameters (?x - block)
+    :precondition (and (ontable ?x) (clear ?x) (arm-empty))
+    :effect (and (not (ontable ?x)) (not (arm-empty)) (holding ?x)))
+
+  (:action put-down
+    :parameters (?x - block)
+    :precondition (holding ?x)
+    :effect (and (not (holding ?x)) (arm-empty) (ontable ?x)))
+
+  (:action stack
+    :parameters (?x - block ?y - block)
+    :precondition (and (holding ?x) (clear ?y))
+    :effect (and (not (holding ?x)) (not (clear ?y)) (arm-empty) (on ?x ?y)))
+
+  (:action unstack
+    :parameters (?x - block ?y - block)
+    :precondition (and (on ?x ?y) (clear ?x) (arm-empty))
+    :effect (and (not (on ?x ?y)) (not (arm-empty)) (holding ?x) (clear ?y)))
+)","(define (problem problem_train_6_scenario_24)
+    (:domain block-world)
+
+    (:objects
+        blue green purple red white yellow - block
+    )
+
+    (:init
+        (arm-empty)
+        (clear green)
+        (clear purple)
+        (clear red)
+        (on green yellow)
+        (on red white)
+        (on white blue)
+        (ontable blue)
+        (ontable purple)
+        (ontable yellow)
+    )
+
+    (:goal
+        (and
+            (clear blue)
+            (clear white)
+            (on blue red)
+            (on green yellow)
+            (on red purple)
+            (on white green)
+            (ontable purple)
+            (ontable yellow)
+        )
+    )
+)
+"
